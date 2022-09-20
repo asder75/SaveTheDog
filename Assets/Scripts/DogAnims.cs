@@ -13,9 +13,9 @@ public class DogAnims : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       // if (Game.aliveDog == true)
-       // {
+        if (Game.aliveDog == true)
+        {
             dogstay.Play("dogstay");
-       // }
+        }
     }
 }
