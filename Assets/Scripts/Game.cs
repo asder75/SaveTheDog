@@ -94,6 +94,11 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     public GameObject mobBirdsObj;
     public GameObject mobBirdsObj_4;
 
+    public Vector3[] dogPositionArray = new[] { new Vector3(1, -214, 0), new Vector3(-12, -91, 0), new Vector3(-12, 217, 0),
+        new Vector3(-12, 110, 0), new Vector3(-5.199576f, -72f, 0f), new Vector3(156f, -72f, 0f), new Vector3(-5.2f, -72f, 0f),
+        new Vector3(-5f, 477f, 0f), new Vector3(235f, -42f, 0f), new Vector3(8.5f, 48f, 0f), new Vector3(-84.7f, 238.4f, 0f),
+        new Vector3(261f, -133f, 0f) };
+
     void Start()
     {
 
@@ -473,7 +478,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     }
     public void NextLevel()
     {
-        if (level >= 1 && level < 10)
+        if (level >= 1 && level < 12)
         {
             level++;
         }//откоменить
@@ -484,86 +489,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
     public void LevelDesign()
     {
-        if (level == 1)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(1, -214, 0);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 2)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(-12, -91, 0);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 3)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(-12, 217, 0);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 4)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(-12, 110, 0);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 5)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(-5.199576f, -72f, 0f);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 6)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(156f, -72f, 0f);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 7)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(-5.2f, -72f, 0f);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 8)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(-5f, 477f, 0f);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 9)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(235f, -42f, 0f);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
-        if (level == 10)
-        {
-            dogLevel_1.transform.localPosition = new Vector3(8.5f, 48f, 0f);
-            dogLevel_1.transform.localRotation = Quaternion.identity;
-
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
+        SetDogPosition();
 
         if (level == 1)
         {
@@ -737,5 +663,13 @@ public class Game : MonoBehaviour, IPointerEnterHandler
         bird_5_4.transform.localScale = new Vector3(300, -300, 1);
         bird_6_4.transform.localScale = new Vector3(300, -300, 1);
     }
-   
+
+    public void SetDogPosition()
+    {
+        dogLevel_1.transform.localPosition = dogPositionArray[level - 1];
+        dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        dogLevel_1.transform.localRotation = Quaternion.identity;
+    }
+
 }
