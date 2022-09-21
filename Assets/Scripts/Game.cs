@@ -76,16 +76,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
     public GameObject customBallonDog;
 
-    public GameObject allBlocks_level_1;
-    public GameObject allBlocks_level_2;
-    public GameObject allBlocks_level_3;
-    public GameObject allBlocks_level_4;
-    public GameObject allBlocks_level_5;
-    public GameObject allBlocks_level_6;
-    public GameObject allBlocks_level_7;
-    public GameObject allBlocks_level_8;
-    public GameObject allBlocks_level_9;
-    public GameObject allBlocks_level_10;
+    public GameObject[] allBlocks;
 
     public GameObject dangerPick;
     public GameObject dangerPick3;
@@ -94,10 +85,17 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     public GameObject mobBirdsObj;
     public GameObject mobBirdsObj_4;
 
-    public Vector3[] dogPositionArray = new[] { new Vector3(1, -214, 0), new Vector3(-12, -91, 0), new Vector3(-12, 217, 0),
-        new Vector3(-12, 110, 0), new Vector3(-5.199576f, -72f, 0f), new Vector3(156f, -72f, 0f), new Vector3(-5.2f, -72f, 0f),
-        new Vector3(-5f, 477f, 0f), new Vector3(235f, -42f, 0f), new Vector3(8.5f, 48f, 0f), new Vector3(-84.7f, 238.4f, 0f),
+    public GameObject temporaryBlock;
+
+    public Vector3[] dogPositionArray = new[] { new Vector3(1, -214, 0), new Vector3(-12, -91, 0), new Vector3(-12, 217, 0), 
+        new Vector3(-12, 110, 0), new Vector3(-48.99938f, 110.3271f, 0f), new Vector3(156f, -72f, 0f), new Vector3(-5.2f, -72f, 0f), 
+        new Vector3(-5f, 477f, 0f), new Vector3(235f, -42f, 0f), new Vector3(8.5f, 48f, 0f), new Vector3(-84.7f, -227f, 0f), 
         new Vector3(261f, -133f, 0f) };
+
+    public Vector3[] allBlocksPositionArray = new[] { new Vector3(0f, 49f, 0f), new Vector3(0, 49, 0), new Vector3(0, 49, 0),
+        new Vector3(0, 0, 0), new Vector3(42f, -183f, 0f), new Vector3(0, -181f, 0f), new Vector3(0f, -146f, 0f),
+        new Vector3(53f, -184f, 0f), new Vector3(0f, -184f, 0f), new Vector3(-200f, -183f, 0f), new Vector3(-200f, -183f, 0f),
+        new Vector3(0f, -0f, 0f) };
 
     void Start()
     {
@@ -249,6 +247,33 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
             customBallonDog.SetActive(true);
             dogLevel_1.transform.GetComponent<Rigidbody2D>().gravityScale = 0;
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 11)
+        {
+            dangerPick.SetActive(false);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 12)
+        {
+            dangerPick.SetActive(false);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 90);
+            mobBirdsObj.transform.localPosition = new Vector3(300, 0, 0);
 
             mobBirdsObj_4.SetActive(false);
         }
@@ -489,140 +514,26 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
     public void LevelDesign()
     {
+        SetBlocksPosition();
         SetDogPosition();
+        SetBirdsPosition();
+    }
+    public void SetBlocksPosition()
+    {
+        Instantiate(allBlocks[level - 1].transform, new Vector3(0f, 0f, 0f), Quaternion.identity).transform.SetParent(BgGame.transform);
+        allBlocks[level - 1].transform.localPosition = allBlocksPositionArray[level - 1];
+        allBlocks[level - 1].GetComponent<Transform>().transform.SetAsFirstSibling();
+    }
 
-        if (level == 1)
-        {
-            allBlocks_level_1.SetActive(true);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 2)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(true);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 3)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(true);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 4)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(true);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 5)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(true);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 6)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(true);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 7)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(true);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 8)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(true);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 9)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(true);
-            allBlocks_level_10.SetActive(false);
-        }
-        if (level == 10)
-        {
-            allBlocks_level_1.SetActive(false);
-            allBlocks_level_2.SetActive(false);
-            allBlocks_level_3.SetActive(false);
-            allBlocks_level_4.SetActive(false);
-            allBlocks_level_5.SetActive(false);
-            allBlocks_level_6.SetActive(false);
-            allBlocks_level_7.SetActive(false);
-            allBlocks_level_8.SetActive(false);
-            allBlocks_level_9.SetActive(false);
-            allBlocks_level_10.SetActive(true);
-        }
-
-
+    public void SetDogPosition()
+    {
+        dogLevel_1.transform.localPosition = dogPositionArray[level - 1];
+        dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        dogLevel_1.transform.localRotation = Quaternion.identity;
+    }
+   public void SetBirdsPosition()
+    {
         bird_1.transform.localPosition = new Vector3(-357, 889, 0);
         bird_1.transform.localRotation = Quaternion.identity;
         bird_2.transform.localPosition = new Vector3(-216, 889, 0);
@@ -663,13 +574,4 @@ public class Game : MonoBehaviour, IPointerEnterHandler
         bird_5_4.transform.localScale = new Vector3(300, -300, 1);
         bird_6_4.transform.localScale = new Vector3(300, -300, 1);
     }
-
-    public void SetDogPosition()
-    {
-        dogLevel_1.transform.localPosition = dogPositionArray[level - 1];
-        dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        dogLevel_1.transform.localRotation = Quaternion.identity;
-    }
-
 }
