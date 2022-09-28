@@ -90,12 +90,14 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     public Vector3[] dogPositionArray = new[] { new Vector3(1, -214, 0), new Vector3(-12, -91, 0), new Vector3(-12, 217, 0), 
         new Vector3(-12, 110, 0), new Vector3(-48.99938f, 110.3271f, 0f), new Vector3(156f, -72f, 0f), new Vector3(-5.2f, -72f, 0f), 
         new Vector3(-5f, 477f, 0f), new Vector3(235f, -42f, 0f), new Vector3(8.5f, 48f, 0f), new Vector3(-84.7f, -227f, 0f), 
-        new Vector3(261f, -133f, 0f) };
+        new Vector3(261f, -133f, 0f),new Vector3(169f, 104f, 0f),new Vector3(0f, 160f, 0f),new Vector3(0f, -69f, 0f),
+        new Vector3(289.6f, -190f, 0f), new Vector3(225f, -437f, 0f) };
 
     public Vector3[] allBlocksPositionArray = new[] { new Vector3(0f, 49f, 0f), new Vector3(0, 49, 0), new Vector3(0, 49, 0),
         new Vector3(0, 0, 0), new Vector3(42f, -183f, 0f), new Vector3(0, -181f, 0f), new Vector3(0f, -146f, 0f),
         new Vector3(53f, -184f, 0f), new Vector3(0f, -184f, 0f), new Vector3(-200f, -183f, 0f), new Vector3(-200f, -183f, 0f),
-        new Vector3(0f, -0f, 0f) };
+        new Vector3(0f, -0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),
+        new Vector3(0f, 0f, 0f)};
 
     void Start()
     {
@@ -277,7 +279,71 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
             mobBirdsObj_4.SetActive(false);
         }
+        if (level == 13)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
 
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 14)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 15)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 16)
+        {
+            dangerPick.SetActive(false);
+            dangerPick3.SetActive(true);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 90);
+            mobBirdsObj.transform.localPosition = new Vector3(300, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if(level == 17)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
 
 
         if (endTouch == false)
@@ -503,7 +569,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     }
     public void NextLevel()
     {
-        if (level >= 1 && level < 12)
+        if (level >= 1 && level < 17)
         {
             level++;
         }//откоменить
@@ -520,9 +586,20 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     }
     public void SetBlocksPosition()
     {
+        temporaryBlock = GameObject.FindGameObjectWithTag("AllBlocksTag");
+        if (temporaryBlock != null)
+        {
+            Destroy(temporaryBlock);
+        }    
+
+
         Instantiate(allBlocks[level - 1].transform, new Vector3(0f, 0f, 0f), Quaternion.identity).transform.SetParent(BgGame.transform);
         allBlocks[level - 1].transform.localPosition = allBlocksPositionArray[level - 1];
-        allBlocks[level - 1].GetComponent<Transform>().transform.SetAsFirstSibling();
+
+
+        temporaryBlock = GameObject.FindGameObjectWithTag("AllBlocksTag");
+
+        temporaryBlock.transform.SetSiblingIndex(0);
     }
 
     public void SetDogPosition()
