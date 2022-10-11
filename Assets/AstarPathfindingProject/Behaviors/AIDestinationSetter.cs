@@ -18,7 +18,20 @@ namespace Pathfinding {
 		public Transform target;
 		IAstarAI ai;
 
-		void OnEnable () {
+		public GameObject dogLevel_1;
+
+
+		private void FixedUpdate()
+        {
+			dogLevel_1 = GameObject.FindGameObjectWithTag("Player");
+			if(dogLevel_1 != null)
+            {
+				target = dogLevel_1.transform;
+
+			}
+		}
+
+        void OnEnable () {
 			ai = GetComponent<IAstarAI>();
 			// Update the destination right before searching for a path as well.
 			// This is enough in theory, but this script will also update the destination every

@@ -74,7 +74,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     public Animation training;
     public GameObject trainingObj;
 
-    public GameObject customBallonDog;
+    //public GameObject customBallonDog;
 
     public GameObject[] allBlocks;
 
@@ -91,13 +91,18 @@ public class Game : MonoBehaviour, IPointerEnterHandler
         new Vector3(-12, 110, 0), new Vector3(-48.99938f, 110.3271f, 0f), new Vector3(156f, -72f, 0f), new Vector3(-5.2f, -72f, 0f), 
         new Vector3(-5f, 477f, 0f), new Vector3(235f, -42f, 0f), new Vector3(8.5f, 48f, 0f), new Vector3(-84.7f, -227f, 0f), 
         new Vector3(261f, -133f, 0f),new Vector3(169f, 104f, 0f),new Vector3(0f, 160f, 0f),new Vector3(0f, -69f, 0f),
-        new Vector3(289.6f, -190f, 0f), new Vector3(225f, -437f, 0f) };
+        new Vector3(289.6f, -190f, 0f), new Vector3(225f, -437f, 0f), new Vector3(-131.1f, 415.3f, 0f) };
 
-    public Vector3[] allBlocksPositionArray = new[] { new Vector3(0f, 49f, 0f), new Vector3(0, 49, 0), new Vector3(0, 49, 0),
-        new Vector3(0, 0, 0), new Vector3(42f, -183f, 0f), new Vector3(0, -181f, 0f), new Vector3(0f, -146f, 0f),
-        new Vector3(53f, -184f, 0f), new Vector3(0f, -184f, 0f), new Vector3(-200f, -183f, 0f), new Vector3(-200f, -183f, 0f),
-        new Vector3(0f, -0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),
-        new Vector3(0f, 0f, 0f)};
+    public Vector3[] allBlocksPositionArray = new[] { new Vector3(0f, 49f, 0f), new Vector3(0, 49, 0), new Vector3(0, 49, 0), //3
+        new Vector3(0, 0, 0), new Vector3(42f, -183f, 0f), new Vector3(0, -181f, 0f), new Vector3(0f, -146f, 0f), //7
+        new Vector3(53f, -184f, 0f), new Vector3(0f, -184f, 0f), new Vector3(-200f, -183f, 0f), new Vector3(-200f, -183f, 0f),//11
+        new Vector3(0f, -0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),//16
+        new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),new Vector3(0f, 0f, 0f),//21
+        new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f),//26
+        new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), //31
+        new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), //36
+        new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), //41
+        new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f)};//46
 
     void Start()
     {
@@ -106,8 +111,17 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     }
     private void FixedUpdate()
     {
+        dogLevel_1 = GameObject.FindGameObjectWithTag("Player");
+
+        temporaryBlock = GameObject.FindGameObjectWithTag("AllBlocksTag");
+        if(temporaryBlock != null)
+        {
+            temporaryBlock.transform.SetSiblingIndex(0);
+        }
+        
+
         //snak
-        if(level == 1 || level == 2)
+        if (level == 1 || level == 2)
         {
             //dangerPick.transform.localPosition = new Vector3(0, 683, 0);
             //dangerPick.transform.localRotation = Quaternion.Euler(0, 0, 90);
@@ -125,7 +139,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
        if(level == 3)
         {
-            customBallonDog.SetActive(true);
+            
 
             //dangerPick.transform.localPosition = new Vector3(-261, -438, 0);
             // dangerPick.transform.localRotation = Quaternion.Euler(0, 0, -180);
@@ -140,7 +154,9 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
             //dangerPick3.transform.localPosition = new Vector3(100, -170, 0);
 
-            dogLevel_1.transform.GetComponent<Rigidbody2D>().gravityScale = 0;
+          
+                dogLevel_1.transform.GetComponent<Rigidbody2D>().gravityScale = 0;
+           
 
             mobBirdsObj_4.SetActive(false);
         }
@@ -148,9 +164,11 @@ public class Game : MonoBehaviour, IPointerEnterHandler
         {
             if (level != 8 || level != 10)
             {
-                customBallonDog.SetActive(false);
+              //  customBallonDog.SetActive(false);
             }
             dogLevel_1.transform.GetComponent<Rigidbody2D>().gravityScale = 1;
+            
+            
         }
        if(level == 4)
         {
@@ -208,7 +226,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
         }
         if (level == 8)
         {
-            customBallonDog.SetActive(true);
+        
 
             
             dangerPick.SetActive(false);
@@ -247,7 +265,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
             mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 90);
             mobBirdsObj.transform.localPosition = new Vector3(300, 0, 0);
 
-            customBallonDog.SetActive(true);
+          
             dogLevel_1.transform.GetComponent<Rigidbody2D>().gravityScale = 0;
 
             mobBirdsObj_4.SetActive(false);
@@ -332,6 +350,383 @@ public class Game : MonoBehaviour, IPointerEnterHandler
             mobBirdsObj_4.SetActive(false);
         }
         if(level == 17)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 18)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 19)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 20)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 21)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 22)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 23)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 24)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 25)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 26)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 27)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 28)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 29)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 30)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 31)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 32)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 33)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 34)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 35)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 36)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 37)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 38)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 39)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 40)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 41)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 42)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 43)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(false);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(false);
+        }
+        if (level == 44)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 45)
+        {
+            dangerPick.SetActive(true);
+            dangerPick3.SetActive(false);
+            dangerPick4.SetActive(true);
+
+            mobBirdsObj.SetActive(true);
+
+            mobBirdsObj.transform.localPosition = new Vector3(0, 0, 0);
+            mobBirdsObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            mobBirdsObj_4.SetActive(true);
+        }
+        if (level == 46)
         {
             dangerPick.SetActive(true);
             dangerPick3.SetActive(false);
@@ -453,6 +848,41 @@ public class Game : MonoBehaviour, IPointerEnterHandler
             }
         }
     }
+    public void QuickStart()
+    {
+        firstMove = true;
+        countBalls = 0;
+        endPicksPoints = true;
+        if (startCoroutineTimer == false)
+        {
+            StartCoroutine(TimeToStartBattle());
+            startCoroutineTimer = true;
+        }
+    }
+    public void SetLevel_15()
+    {
+        level = 15;
+    }
+    public void SetLevel_20()
+    {
+        level = 20;
+    }
+    public void SetLevel_25()
+    {
+        level = 25;
+    }
+    public void SetLevel_30()
+    {
+        level = 30;
+    }
+    public void SetLevel_35()
+    {
+        level = 35;
+    }
+    public void SetLevel_40()
+    {
+        level = 40;
+    }
 
     public void ClickCreate()
     {
@@ -559,17 +989,37 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
     public void ChangeRes()
     {
+       
+
         changeHomeOrRes = false;
+
+        dogLevel_1 = GameObject.FindGameObjectWithTag("Player");
+
         dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         dogLevel_1.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+
+        temporaryBlock = GameObject.FindGameObjectWithTag("AllBlocksTag");
+
+        if(temporaryBlock != null)
+        {
+            temporaryBlock.transform.SetSiblingIndex(0);
+        }
+       
     }
     public void LoadLevelInMenu()
     {
+        if (temporaryBlock != null)
+        {
+            Destroy(temporaryBlock);
+        }
+
         LevelDesign();
     }
     public void NextLevel()
     {
-        if (level >= 1 && level < 17)
+        dogLevel_1 = GameObject.FindGameObjectWithTag("Player");
+
+        if (level >= 1 && level < 46)
         {
             level++;
         }//откоменить
@@ -581,8 +1031,10 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     public void LevelDesign()
     {
         SetBlocksPosition();
-        SetDogPosition();
+       // SetDogPosition();
         SetBirdsPosition();
+
+        dogLevel_1 = GameObject.FindGameObjectWithTag("Player");
     }
     public void SetBlocksPosition()
     {
@@ -599,7 +1051,12 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
         temporaryBlock = GameObject.FindGameObjectWithTag("AllBlocksTag");
 
-        temporaryBlock.transform.SetSiblingIndex(0);
+        if(temporaryBlock!= null)
+        {
+            temporaryBlock.transform.SetSiblingIndex(0);
+        }
+            
+        
     }
 
     public void SetDogPosition()
