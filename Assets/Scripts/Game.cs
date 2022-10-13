@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Game : MonoBehaviour, IPointerEnterHandler
 {
-    public int level = 1;
+    public static int level = 1;
     public static bool changeHomeOrRes = false;
     public Text levelText_Win;
     public Text levelText_Lose;
@@ -16,6 +16,9 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
     public GameObject block;
     public GameObject BgGame;
+
+    public  GameObject BgMenu;
+   
 
     public Vector2 startPos;
     public Vector2 direction;
@@ -104,10 +107,10 @@ public class Game : MonoBehaviour, IPointerEnterHandler
         new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), //41
         new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f),  new Vector3(0f, 0f, 0f)};//46
 
+    
     void Start()
     {
-
-
+        LoadLevelInMenu();
     }
     private void FixedUpdate()
     {
@@ -985,6 +988,20 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         selectObj = eventData.pointerEnter;
+    }
+
+    public void NewReloadLevel()
+    {
+        SceneManager.LoadScene(1);
+        oneAnimAlive = false;
+        aliveDog = true;
+       
+
+
+    }
+    public void GoMenuSceneNull()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void ChangeRes()
