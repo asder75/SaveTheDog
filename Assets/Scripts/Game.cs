@@ -8,9 +8,15 @@ using UnityEngine.EventSystems;
 public class Game : MonoBehaviour, IPointerEnterHandler
 {
     public static int level = 1;
+
+    public static int liveToAd = 0;
+    public static bool goShowAd = false;
+
     public static bool changeHomeOrRes = false;
     public Text levelText_Win;
     public Text levelText_Lose;
+
+    public static bool _isAd = true;
 
     public GameObject dogLevel_1;
 
@@ -18,7 +24,7 @@ public class Game : MonoBehaviour, IPointerEnterHandler
     public GameObject BgGame;
 
     public  GameObject BgMenu;
-   
+    public GameObject adManager;
 
     public Vector2 startPos;
     public Vector2 direction;
@@ -992,6 +998,18 @@ public class Game : MonoBehaviour, IPointerEnterHandler
 
     public void NewReloadLevel()
     {
+        if (_isAd == true)
+        {
+            liveToAd++;
+            if (liveToAd >= 4)
+            {
+                goShowAd = true;
+
+                adManager = GameObject.FindGameObjectWithTag("AdManagerTag");
+                adManager.GetComponent<butda2haX>().ShowAd();
+            }
+        }
+
         SceneManager.LoadScene(1);
         oneAnimAlive = false;
         aliveDog = true;
